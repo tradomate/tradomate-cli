@@ -1,4 +1,4 @@
-# tradomate-cli
+# Tradomate CLI
 
 A Command Line Interface (CLI) application to build and deploy AI Chatbots on chatbot.tradomate.io.
 
