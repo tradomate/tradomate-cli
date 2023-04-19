@@ -4,10 +4,28 @@ import requests
 API_BASE_URL = "https://api.tradomate.io/api/v1"
 
 
-@click.group()
-def cli():
-    """A CLI application for building and deploying AI Chatbots."""
-    pass
+@click.group(context_settings=dict(help_option_names=["-h", "--help"]))
+@click.option(
+    "--color",
+    type=click.Choice(["on", "off", "auto"]),
+    default="auto",
+    help="Turn on/off color output (on, off, auto)",
+)
+@click.pass_context
+def cli(ctx, color):
+    """The official command-line tool to interact with chatbot.tradomate.io."""
+    ctx.ensure_object(dict)
+    ctx.obj["color"] = color
+    if color == "on":
+        click.echo("Color output enabled.")
+    elif color == "off":
+        click.echo("Color output disabled.")
+
+
+@cli.command("help", short_help="Show this message and exit.")
+@click.pass_context
+def help(ctx):
+    click.echo(ctx.parent.get_help())
 
 
 @cli.command()
